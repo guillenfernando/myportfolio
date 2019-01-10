@@ -1,21 +1,5 @@
 <?php
-add_theme_support( 'title-tag' );
-add_theme_support( 'post-thumbnails' );
-register_nav_menus( array(
-    'primary' => esc_html__( 'Primary Menu', 'custom' ),
-) );
-function custom_widgets_init() {
-    register_sidebar( array(
-        'name'          => esc_html__( 'Sidebar', 'custom' ),
-        'id'            => 'sidebar-1',
-        'description'   => '',
-        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</aside>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ) );
-}
-add_action( 'widgets_init', 'custom_widgets_init' );
+
 
 // always show admin bar
 function pjw_login_adminbar( $wp_admin_bar) {
@@ -136,18 +120,191 @@ function custom_post_type() {
 }
 add_action( 'init', 'custom_post_type', 0 );
 
+// Register Custom Post Type Skills
+if ( ! function_exists('custom_post_type_skills') ) {
 
-/*Menu*/
+// Register Custom Post Type
+    function custom_post_type_skills() {
+
+        $labels = array(
+            'name'                  => _x( 'skills', 'Post Type General Name', 'text_domain' ),
+            'singular_name'         => _x( 'skill', 'Post Type Singular Name', 'text_domain' ),
+            'menu_name'             => __( 'Skills', 'text_domain' ),
+            'name_admin_bar'        => __( 'Skills', 'text_domain' ),
+            'archives'              => __( 'Skill Archives', 'text_domain' ),
+            'attributes'            => __( 'Skill Attributes', 'text_domain' ),
+            'parent_item_colon'     => __( 'Parent Skill:', 'text_domain' ),
+            'all_items'             => __( 'All Skills', 'text_domain' ),
+            'add_new_item'          => __( 'Add New Skill', 'text_domain' ),
+            'add_new'               => __( 'Add New Skill', 'text_domain' ),
+            'new_item'              => __( 'New Skill', 'text_domain' ),
+            'edit_item'             => __( 'Edit Skill', 'text_domain' ),
+            'update_item'           => __( 'Update Skill', 'text_domain' ),
+            'view_item'             => __( 'View Skill', 'text_domain' ),
+            'view_items'            => __( 'View Skill', 'text_domain' ),
+            'search_items'          => __( 'Search Skill', 'text_domain' ),
+            'not_found'             => __( 'Not found', 'text_domain' ),
+            'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+            'featured_image'        => __( 'Featured Image', 'text_domain' ),
+            'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+            'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+            'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+            'insert_into_item'      => __( 'Insert into skill', 'text_domain' ),
+            'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+            'items_list'            => __( 'Items list', 'text_domain' ),
+            'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+            'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+        );
+        $args = array(
+            'label'                 => __( 'skill', 'text_domain' ),
+            'description'           => __( 'Post Type Description', 'text_domain' ),
+            'labels'                => $labels,
+            'supports'              => array( 'title', 'editor' ),
+            'taxonomies'            => array( 'category', 'post_tag' ),
+            'hierarchical'          => false,
+            'public'                => true,
+            'show_ui'               => true,
+            'show_in_menu'          => true,
+            'menu_position'         => 5,
+            'show_in_admin_bar'     => true,
+            'show_in_nav_menus'     => true,
+            'can_export'            => true,
+            'has_archive'           => true,
+            'exclude_from_search'   => false,
+            'publicly_queryable'    => true,
+            'capability_type'       => 'page',
+        );
+        register_post_type( 'skill', $args );
+
+    }
+    add_action( 'init', 'custom_post_type_skills', 0 );
+
+}
+
+// Register Custom Post Type Experience
+function custom_post_type_experience() {
+
+    $labels = array(
+        'name'                  => _x( 'Experience', 'Post Type General Name', 'text_domain' ),
+        'singular_name'         => _x( 'experience', 'Post Type Singular Name', 'text_domain' ),
+        'menu_name'             => __( 'Experience', 'text_domain' ),
+        'name_admin_bar'        => __( 'Experience', 'text_domain' ),
+        'archives'              => __( 'experience Archives', 'text_domain' ),
+        'attributes'            => __( 'experience Attributes', 'text_domain' ),
+        'parent_item_colon'     => __( 'Parent experience:', 'text_domain' ),
+        'all_items'             => __( 'All Experience', 'text_domain' ),
+        'add_new_item'          => __( 'Add New Experience', 'text_domain' ),
+        'add_new'               => __( 'Add Experience', 'text_domain' ),
+        'new_item'              => __( 'New Experience', 'text_domain' ),
+        'edit_item'             => __( 'Edit Experience', 'text_domain' ),
+        'update_item'           => __( 'Update Experience', 'text_domain' ),
+        'view_item'             => __( 'View Experience', 'text_domain' ),
+        'view_items'            => __( 'View Experience', 'text_domain' ),
+        'search_items'          => __( 'Search Experience', 'text_domain' ),
+        'not_found'             => __( 'Not found', 'text_domain' ),
+        'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+        'featured_image'        => __( 'Featured Image', 'text_domain' ),
+        'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+        'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+        'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+        'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+        'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+        'items_list'            => __( 'Items list', 'text_domain' ),
+        'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+        'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+    );
+    $args = array(
+        'label'                 => __( 'experience', 'text_domain' ),
+        'description'           => __( 'Post Type Description', 'text_domain' ),
+        'labels'                => $labels,
+        'supports'              => array( 'title', 'editor' ),
+        'taxonomies'            => array( 'category', 'post_tag' ),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'page',
+    );
+    register_post_type( 'experience', $args );
+
+}
+add_action( 'init', 'custom_post_type_experience', 0 );
+
+
+// Register Custom Post Type Testimonials
+function custom_post_type_testimonial() {
+
+    $labels = array(
+        'name'                  => _x( 'Testimonials', 'Post Type General Name', 'text_domain' ),
+        'singular_name'         => _x( 'Testimonial', 'Post Type Singular Name', 'text_domain' ),
+        'menu_name'             => __( 'Testimonial', 'text_domain' ),
+        'name_admin_bar'        => __( 'Testimonials', 'text_domain' ),
+        'archives'              => __( 'Item Archives', 'text_domain' ),
+        'attributes'            => __( 'Item Attributes', 'text_domain' ),
+        'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
+        'all_items'             => __( 'All Testimonials', 'text_domain' ),
+        'add_new_item'          => __( 'Add New Testimonial', 'text_domain' ),
+        'add_new'               => __( 'Add Testimonial', 'text_domain' ),
+        'new_item'              => __( 'New Testimonial', 'text_domain' ),
+        'edit_item'             => __( 'Edit Testimonial', 'text_domain' ),
+        'update_item'           => __( 'Update Testimonial', 'text_domain' ),
+        'view_item'             => __( 'View Testimonial', 'text_domain' ),
+        'view_items'            => __( 'View Testimonials', 'text_domain' ),
+        'search_items'          => __( 'Search Testimonial', 'text_domain' ),
+        'not_found'             => __( 'Not found', 'text_domain' ),
+        'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+        'featured_image'        => __( 'Featured Image', 'text_domain' ),
+        'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+        'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+        'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+        'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+        'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+        'items_list'            => __( 'Items list', 'text_domain' ),
+        'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+        'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+    );
+    $args = array(
+        'label'                 => __( 'Testimonial', 'text_domain' ),
+        'description'           => __( 'Post Type Description', 'text_domain' ),
+        'labels'                => $labels,
+        'supports'              => array( 'title', 'editor', 'thumbnail'),
+        'taxonomies'            => array( 'category', 'post_tag' ),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'page',
+    );
+    register_post_type( 'testimonial', $args );
+
+}
+add_action( 'init', 'custom_post_type_testimonial', 0 );
+
+
+/*Menus*/
 function register_my_menus() {
     register_nav_menus(
         array(
-            'header-menu' => __( 'Header Menu' ),
-            'extra-menu' => __( 'Extra Menu' )
+            'header-menu' => __( 'Header Menu'),
+            'portfolio-menu' => __( 'Portfolio Menu')
         )
     );
 }
 add_action( 'init', 'register_my_menus' );
-
 
 
 add_filter('nav_menu_css_class', 'discard_menu_classes', 10, 2);
@@ -158,10 +315,6 @@ function discard_menu_classes($classes, $item) {
 }
 
 /*Walter menu*/
-
-class IBenic_Walker extends Walker_Nav_Menu {
-    // Our Code
-}
 
 class Walker_Quickstart_Menu extends Walker {
 
@@ -184,4 +337,11 @@ class Walker_Quickstart_Menu extends Walker {
         );
     }
 
+}
+
+/*remove margin from the nav*/
+add_action('get_header', 'my_filter_head');
+
+function my_filter_head() {
+    remove_action('wp_head', '_admin_bar_bump_cb');
 }

@@ -11,19 +11,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
 
-    <?php wp_head(); ?>
+    <?php wp_head();
+    ?>
 </head>
 
-<body data-spy="scroll" data-target="#navbar-example2" <?php body_class(); ?>>
+<body data-spy="scroll" data-target=".mynavbar" data-offset="60" <?php body_class(); ?>>
 
-<nav id="navbar-example2" class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+<nav class="mynavbar navbar sticky-top navbar-expand-lg">
+    <img src="" alt="main logo">
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="container" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="d-flex navbar-nav ml-auto">
-            <?php $menuParameters = array(
+            <?php
+
+            if(is_front_page() || is_home()){
+
+                wp_nav_menu(array('theme_location' => 'header-menu',     'container'       => false,
+                    'echo'            => false,
+                    'items_wrap'      => '%3$s',
+                    'depth'           => 0));
+
+            }else{
+
+                wp_nav_menu(array('theme_location' => 'portfolio-menu',     'container'       => false,
+                    'echo'            => false,
+                    'items_wrap'      => '%3$s',
+                    'depth'           => 0));
+
+            }
+
+            $menuParameters = array(
                 'container'       => false,
                 'echo'            => false,
                 'items_wrap'      => '%3$s',
@@ -35,3 +58,5 @@
         </div>
     </div>
 </nav>
+
+
